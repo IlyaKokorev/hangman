@@ -14,11 +14,10 @@ class ConsoleInterface
       #{figure}
       Ошибки (#{@game.errors_made}): #{errors_to_show}
       У вас осталось ошибок: #{@game.errors_allowed}
-
     END
 
     if @game.won?
-      puts "Поздравляем, вы выиграли!"
+      puts 'Поздравляем, вы выиграли!'
     elsif @game.lost?
       puts "Вы проиграли, загаданное слово: #{@game.word}"
     end
@@ -32,7 +31,7 @@ class ConsoleInterface
     result =
       @game.letters_to_guess.map do |letter|
         if letter == nil
-          "__"
+          '__'
         else
           letter
         end
@@ -46,7 +45,7 @@ class ConsoleInterface
   end
 
   def get_input
-    print "Введите следующую букву: "
+    print 'Введите следующую букву: '
     gets[0].upcase
   end
 end
