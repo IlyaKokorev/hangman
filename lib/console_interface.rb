@@ -1,7 +1,8 @@
+require 'colorize'
+
 class ConsoleInterface
   FIGURES =
-      Dir[__dir__ + '/../data/figures/*.txt'].
-      sort.
+    Dir[__dir__ + '/../data/figures/*.txt'].sort.
       map { |file_name| File.read(file_name) }
 
   def initialize(game)
@@ -10,21 +11,21 @@ class ConsoleInterface
 
   def print_out
     puts <<~END
-      Слово: #{word_to_show}
+      Слово: #{word_to_show.colorize(:light_blue)}
       #{figure}
-      Ошибки (#{@game.errors_made}): #{errors_to_show}
+      Ошибки (#{@game.errors_made}): #{errors_to_show.colorize(:red)}
       У вас осталось ошибок: #{@game.errors_allowed}
     END
 
     if @game.won?
-      puts 'Поздравляем, вы выиграли!'
+      puts 'Поздравляем, вы выиграли!'.colorize(:green)
     elsif @game.lost?
-      puts "Вы проиграли, загаданное слово: #{@game.word}"
+      puts "Вы проиграли, загаданное слово: #{@game.word}".colorize(:red)
     end
   end
 
   def figure
-    FIGURES[@game.errors_made]
+    FIGURES[@game.errors_made].colorize(:light_blue)
   end
 
   def word_to_show
